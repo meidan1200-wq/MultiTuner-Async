@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "UI Mode": {
+      "commandName": "Project"
+    },
+    "Test Mode": {
+      "commandName": "Project",
+      "commandLineArgs": "--test"
+    }
+  }
+}

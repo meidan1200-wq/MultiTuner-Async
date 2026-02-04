@@ -1,0 +1,113 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="CinematicButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#181818"/>
+        <Setter Property="Foreground" Value="White"/>
+
+        <Setter Property="Padding" Value="18,10"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+
+
+        
+
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <!-- Name the root so we can target its RenderTransform properties reliably -->
+                    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5, 0.5">
+                        <Grid.RenderTransform>
+                            <!-- No need to rely on the transform's x:Name for Storyboard.TargetName -->
+                            <ScaleTransform/>
+                        </Grid.RenderTransform>
+
+                        <Border x:Name="bdr"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="15" 
+                                BorderThickness="0">
+                            <Border.Effect>
+                                <!-- Do not rely on naming the effect; target via the Border's Effect property path -->
+                                <DropShadowEffect
+                                                  Color="{Binding BorderBrush.Color, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  BlurRadius="20"
+                                                  ShadowDepth="0"
+                                                  Opacity="0"/>
+                            </Border.Effect>
+
+                            <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            RecognizesAccessKey="True"/>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!-- Target the RootGrid's RenderTransform scale properties via property path -->
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.05" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.05" Duration="0:0:0.2"/>
+                                        <!-- Target the Border's DropShadowEffect opacity via the effect property path -->
+                                        <DoubleAnimation Storyboard.TargetName="bdr" Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.Opacity)" To="0.9" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="bdr" Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.Opacity)" To="0" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                        <!-- Replace Setter-based scale (which referenced a named transform) with animations targeting RootGrid -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="0.98" Duration="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="0.98" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SpotifyIconButtonStyle" TargetType="Button" BasedOn="{StaticResource CinematicButtonStyle}">
+        <Setter Property="BorderBrush" Value="#1DB954"/>
+        <Setter Property="Tag" Value="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.5 17.3c-.2.3-.5.4-.8.2-2.2-1.3-5-1.6-8.2-.9-.4.1-.8-.2-.9-.5-.1-.4.2-.8.5-.9 3.5-.8 6.7-.4 9.2 1.1.3.1.4.5.2.8zm1.1-2.4c-.3.4-.8.5-1.2.3-2.7-1.7-6.8-2.2-9.9-1.2-.4.1-.9-.1-1-.6-.1-.4.1-.9.6-1 3.6-1.1 8.1-.5 11.2 1.4.4.2.5.7.3 1.1zm.1-2.5C15.4 10.7 8.9 10.5 5.2 11.6c-.6.2-1.2-.2-1.4-.7-.2-.6.2-1.2.7-1.4 4.2-1.3 11.4-1.1 15.8 1.5.5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4z"/>
+    </Style>
+
+    <Style x:Key="YoutubeIconButtonStyle" TargetType="Button" BasedOn="{StaticResource CinematicButtonStyle}">
+        <Setter Property="BorderBrush" Value="#FF0000"/>
+        <Setter Property="Tag" Value="M23.5 6.2c-.3-1-1-1.8-2-2C19.6 3.7 12 3.7 12 3.7s-7.6 0-9.4.5c-1 .2-1.8 1-2 2C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2 1.9.5 9.4.5 9.4.5s7.6 0 9.4-.5c1-.2 1.8-1 2-2 .6-1.8.6-5.8.6-5.8s-.1-4-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>
+    </Style>
+
+</ResourceDictionary>

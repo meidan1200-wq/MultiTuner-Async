@@ -1,0 +1,165 @@
+﻿<Window x:Class="MultiTuner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
+        xmlns:listViewControl="clr-namespace:MultiTuner.View.ListViewControl"
+        Title="Music Transfer"
+        Width="850" Height="700" MinWidth="850" MinHeight="700"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32" 
+                      ResizeBorderThickness="7" 
+                      GlassFrameThickness="0" 
+                      CornerRadius="0"
+                      NonClientFrameEdges="None" />
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="MainWindowBorder" BorderBrush="#252525" BorderThickness="1">
+        <Grid Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="Transparent" MouseDown="Toolbar_MouseDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Music Transfer :"
+               Foreground="#B0B0B0"
+               FontSize="12"
+               VerticalAlignment="Center"
+               Margin="15,0,5,0"/>
+
+                <TextBlock Text="{Binding AppVersion}"
+               Foreground="#B0B0B0"
+               FontSize="11"
+               VerticalAlignment="Center"
+               Margin="100,0,5,0"/>
+
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Content="0" FontFamily="Marlett" Style="{StaticResource TitleBarButtonStyle}" Click="Minimize_Click"/>
+                    <Button Content="1" FontFamily="Marlett" Style="{StaticResource TitleBarButtonStyle}" Click="Maximize_Click"/>
+                    <Button Content="r" FontFamily="Marlett" Style="{StaticResource TitleBarCloseButtonStyle}" Click="Close_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <listViewControl:PlaylistItemControl
+            Grid.Row="1" Grid.Column="0"
+            Scale="{Binding ElementName=SizeSlider, Path=Value}"
+            Items="{Binding Spotify.AllPlaylists}"
+            SelectedItem="{Binding Spotify.SelectedPlaylist, Mode=TwoWay}"/>
+
+            <listViewControl:SongItemControl
+            Grid.Row="2" Grid.Column="0" 
+            Items="{Binding Spotify.AllTracks}"/>
+
+            <listViewControl:PlaylistItemControl
+            Grid.Row="1" Grid.Column="1"
+            Scale="{Binding ElementName=SizeSlider, Path=Value}"
+            Items="{Binding YouTube.AllPlaylists}"
+            SelectedItem="{Binding YouTube.SelectedPlaylist, Mode=TwoWay}"/>
+
+            <listViewControl:SongItemControl
+            Grid.Row="2" Grid.Column="1"
+            Items="{Binding YouTube.AllTracks}"/>
+
+            <Grid Grid.Row="3" Grid.Column="0" Margin="15,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" 
+               Text="Sync Status:" 
+               Foreground="#B0B0B0" 
+               FontSize="10" 
+               VerticalAlignment="Center"/>
+
+               <TextBlock Grid.Column="1" 
+               Text="{Binding StatusMessage}" 
+               Foreground="White" 
+               FontWeight="SemiBold" 
+               Margin="10,0" 
+               VerticalAlignment="Center"
+               TextTrimming="CharacterEllipsis"
+               TextWrapping="NoWrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="4" ShadowDepth="1" Opacity="0.8"/>
+                    </TextBlock.Effect>
+               </TextBlock>
+
+                <Button Grid.Column="2"
+                Content="Sync to Spotify"
+                Style="{StaticResource SpotifyIconButtonStyle}"
+                Command="{Binding SaveCommand}"
+                CommandParameter="Spotify"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1" Margin="15,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Zoom" Foreground="#B0B0B0" FontSize="10" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                <Slider
+                Grid.Column="1"
+                x:Name="SizeSlider"
+                Style="{StaticResource ModernSliderStyle}"
+                Minimum="0.5"
+                Maximum="2"
+                Value="1"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"/>
+
+                <Button 
+                Grid.Column="2"
+                Content="Sync to YouTube"
+                Style="{StaticResource YoutubeIconButtonStyle}"
+                Command="{Binding SaveCommand}"
+                CommandParameter="YouTube"/>
+            </Grid>
+
+
+            <ContentControl Content="{Binding UpdatePopup}"
+                Visibility="{Binding IsUpdatePopupVisible,
+                             Converter={StaticResource BoolToVisibilityConverter}}"
+                Grid.Row="0" Grid.Column="0"
+                Grid.RowSpan="4" Grid.ColumnSpan="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
+
+
+
+
+
+
+        </Grid>
+    </Border>
+    
+    
+
+</Window>
