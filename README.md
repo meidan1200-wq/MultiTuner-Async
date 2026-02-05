@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="[https://i.ibb.co/L5hY5Y3/8nZx5xYy.png](https://delivery.pixelbin.io/dynamicApps/inputs/photo-color-correction/1770301785879-result-image.png)" width="120" alt="App Logo" />
+<img src="https://i.ibb.co/L5hY5Y3/8nZx5xYy.png" width="120" alt="App Logo" />
 
 <hr style="border: 0.5px solid #333;" />
 
@@ -22,7 +22,12 @@
 <br />
 <br />
 
-<img src="./Screenshot of the app.jpg" alt="Music Transfer App Interface" width="100%" style="border-radius: 10px; border: 1px solid #333; box-shadow: 0px 10px 30px rgba(0,0,0,0.5);" />
+<a href="https://ibb.co/LhkGq59R">
+  <img src="https://i.ibb.co/n8gWVCQm/My-User-Inteafce-App.png" 
+       alt="Music Transfer App Interface" 
+       width="100%" 
+       style="border-radius: 12px; border: 1px solid #333; box-shadow: 0px 10px 30px rgba(0,0,0,0.6);" />
+</a>
 
 <br />
 
