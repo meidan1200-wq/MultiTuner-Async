@@ -23,11 +23,11 @@
 <br />
 
 <a href="https://ibb.co/LhkGq59R">
-  <img src="https://i.ibb.co/n8gWVCQm/My-User-Inteafce-App.png" 
-       alt="Music Transfer App Interface" 
-       width="100%" 
-       style="border-radius: 12px; border: 1px solid #333; box-shadow: 0px 10px 30px rgba(0,0,0,0.6);" />
-</a>
+    <img src="[https://i.ibb.co/n8gWVCQm/My-User-Inteafce-App.png](https://ibb.co/LhkGq59R)" 
+         alt="Music Transfer App Interface" 
+         width="100%" 
+         style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #333; box-shadow: 0px 10px 30px rgba(0,0,0,0.6);" />
+  </a>
 
 <br />
 
