@@ -1,22 +1,15 @@
 <div align="center">
 
-<img src="https://i.ibb.co/L5hY5Y3/8nZx5xYy.png" width="120" alt="App Logo" />
+<img width="1200" height="auto" alt="Image" src="https://github.com/user-attachments/assets/f279de93-cc63-4071-bdda-fab9459f9435" />
 
-<hr style="border: 0.5px solid #333;" />
-
-# 🎵 Playlist Transfer Application
-### *Seamlessly migrate your music between platforms*
-
-<hr style="border: 0.5px solid #333;" />
+<br />
+<br />
 
 <a href="https://spotify.com">
   <img src="https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white" alt="Spotify" />
 </a>
 <a href="https://youtube.com">
   <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
-</a>
-<a href="#">
-  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#" />
 </a>
 
 <br />
